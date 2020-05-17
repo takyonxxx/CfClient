@@ -271,8 +271,14 @@ class FlightTab(Tab, flight_tab_class):
     def _baro_data_received(self, timestamp, data, logconf):
         if self.isVisible():
             estimated_z = data[LOG_NAME_ESTIMATED_Z]
+            asl = data["baro.asl"]
+            temp = data["baro.temp"]
+            pressure = data["baro.pressure"]
             self.actualHeight.setText(("%.2f" % estimated_z))
             self.ai.setBaro(estimated_z, self.is_visible())
+            self.ai.setAsl(asl, self.is_visible())
+            self.ai.setTemp(temp, self.is_visible())
+            self.ai.setPressure(pressure, self.is_visible())
 
     def _heighthold_input_updated(self, roll, pitch, yaw, height):
         if (self.isVisible() and
@@ -352,7 +358,11 @@ class FlightTab(Tab, flight_tab_class):
         if not self.logBaro:
             # The sensor is available, set up the logging
             self.logBaro = LogConfig("Baro", 200)
+
             self.logBaro.add_variable(LOG_NAME_ESTIMATED_Z, "float")
+            self.logBaro.add_variable("baro.asl", "float")
+            self.logBaro.add_variable("baro.temp", "float")
+            self.logBaro.add_variable("baro.pressure", "float")
 
             try:
                 self.helper.cf.log.add_config(self.logBaro)

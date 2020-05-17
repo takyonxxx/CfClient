@@ -49,6 +49,9 @@ class AttitudeIndicator(QtWidgets.QWidget):
         self.hover = False
         self.hoverHeight = 0.0
         self.hoverTargetHeight = 0.0
+        self.asl = 0.0
+        self.temp = 0.0
+        self.pressure = 0.0
 
         self.setMinimumSize(30, 30)
         # self.setMaximumSize(240,240)
@@ -71,6 +74,21 @@ class AttitudeIndicator(QtWidgets.QWidget):
 
     def setBaro(self, height, repaint=True):
         self.hoverHeight = height
+        if repaint:
+            self.repaint()
+
+    def setAsl(self, asl, repaint=True):
+        self.asl = asl
+        if repaint:
+            self.repaint()
+
+    def setTemp(self, temp, repaint=True):
+        self.temp = temp
+        if repaint:
+            self.repaint()
+
+    def setPressure(self, pressure, repaint=True):
+        self.pressure = pressure
         if repaint:
             self.repaint()
 
@@ -260,10 +278,12 @@ if __name__ == "__main__":
             self.c.updateBW.emit(value)
             self.wid.repaint()
 
+
     def main():
         app = QtWidgets.QApplication(sys.argv)
         Example()
         sys.exit(app.exec_())
+
 
     if __name__ == '__main__':
         main()
