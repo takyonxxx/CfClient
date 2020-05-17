@@ -327,6 +327,7 @@ class MainUI(QtWidgets.QMainWindow, main_window_class):
             item.toggled.connect(tab.toggleVisibility)
             self.tabsMenuItem.addAction(item)
             tabItems[tab.getTabName()] = item
+            logger.info("----> tabs [{}]".format(tab.getTabName()))
             self.loadedTabs.append(tab)
             if not tab.enabled:
                 item.setEnabled(False)
@@ -334,6 +335,7 @@ class MainUI(QtWidgets.QMainWindow, main_window_class):
         # First instantiate all tabs and then open them in the correct order
         try:
             for tName in Config().get("open_tabs").split(","):
+                logger.info("opening tabs [{}]".format(tName))
                 t = tabItems[tName]
                 if (t is not None and t.isEnabled()):
                     # Toggle though menu so it's also marked as open there

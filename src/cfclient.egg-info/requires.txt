@@ -9,4 +9,7 @@ quamash==0.6.1
 [dev]
 
 [qt5]
-PyQt5==5.13.2
+PyQt5==5.14
+
+[qt5w]
+PyQtWebEngine==5.14

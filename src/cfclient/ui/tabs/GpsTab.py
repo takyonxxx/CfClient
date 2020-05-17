@@ -38,7 +38,6 @@ from cflib.crazyflie.log import LogConfig
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 from PyQt5 import QtNetwork
-from PyQt5 import QtWebKit
 from PyQt5 import uic
 
 __author__ = 'Bitcraze AB'
@@ -71,21 +70,6 @@ class GpsTab(Tab, gps_tab_class):
         self.helper = helper
         self._cf = helper.cf
 
-        view = self.view = QtWebKit.QWebView()
-
-        cache = QtNetwork.QNetworkDiskCache()
-        cache.setCacheDirectory(cfclient.config_path + "/cache")
-        view.page().networkAccessManager().setCache(cache)
-        view.page().networkAccessManager()
-
-        view.page().mainFrame().addToJavaScriptWindowObject("MainWindow", self)
-        view.page().setLinkDelegationPolicy(QtWebKit.QWebPage.DelegateAllLinks)
-        view.load(QtCore.QUrl(cfclient.module_path + "/resources/map.html"))
-        view.loadFinished.connect(self.onLoadFinished)
-        view.linkClicked.connect(QtGui.QDesktopServices.openUrl)
-
-        self.map_layout.addWidget(view)
-
         self._reset_max_btn.clicked.connect(self._reset_max)
 
         # Connect the signals
@@ -103,24 +87,6 @@ class GpsTab(Tab, gps_tab_class):
         self._max_speed = 0.0
         self._lat = 0
         self._long = 0
-
-    def onLoadFinished(self):
-        with open(cfclient.module_path + "/resources/map.js", 'r') as f:
-            frame = self.view.page().mainFrame()
-            frame.evaluateJavaScript(f.read())
-
-    @QtCore.pyqtSlot(float, float)
-    def onMapMove(self, lat, lng):
-        return
-
-    def panMap(self, lng, lat):
-        frame = self.view.page().mainFrame()
-        frame.evaluateJavaScript('map.panTo(L.latLng({}, {}));'.format(lat,
-                                                                       lng))
-
-    def _place_cf(self, lng, lat, acc):
-        frame = self.view.page().mainFrame()
-        frame.evaluateJavaScript('cf.setLatLng([{}, {}]);'.format(lat, lng))
 
     def _connected(self, link_uri):
         lg = LogConfig("GPS", 1000)
@@ -145,16 +111,16 @@ class GpsTab(Tab, gps_tab_class):
     def _logging_error(self, log_conf, msg):
         """Callback from the log layer when an error occurs"""
         QMessageBox.about(self, "Plot error", "Error when starting log config"
-                          " [%s]: %s" % (log_conf.name, msg))
+                                              " [%s]: %s" % (log_conf.name, msg))
 
     def _reset_max(self):
         """Callback from reset button"""
         self._max_speed = 0.0
         self._speed_max.setText(str(self._max_speed))
-        self._long.setText("")
-        self._lat.setText("")
-        self._height.setText("")
-        self._speed.setText("")
+        self._long.setText("11")
+        self._lat.setText("11")
+        self._height.setText("11")
+        self._speed.setText("11")
         self._heading.setText("")
         self._accuracy.setText("")
         self._fix_type.setText("")
@@ -169,6 +135,5 @@ class GpsTab(Tab, gps_tab_class):
             self._lat.setText("{:.6f}".format(lat))
             self._nbr_locked_sats.setText(str(data["gps.nsat"]))
             self._height.setText("{:.2f}".format(float(data["gps.hMSL"])))
-            self._place_cf(long, lat, 1)
             self._lat = lat
             self._long = long

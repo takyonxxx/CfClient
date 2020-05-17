@@ -82,16 +82,16 @@ if sys.platform == 'win32':
     platform_dev_requires = ['cx_freeze==5.1.1', 'jinja2==2.10.3']
 
 package_data = {
-    'cfclient.ui':  relative(glob('src/cfclient/ui/*.ui')),
+    'cfclient.ui': relative(glob('src/cfclient/ui/*.ui')),
     'cfclient.ui.tabs': relative(glob('src/cfclient/ui/tabs/*.ui')),
-    'cfclient.ui.widgets':  relative(glob('src/cfclient/ui/widgets/*.ui')),
-    'cfclient.ui.toolboxes':  relative(glob('src/cfclient/ui/toolboxes/*.ui')),  # noqa
-    'cfclient.ui.dialogs':  relative(glob('src/cfclient/ui/dialogs/*.ui')),
-    'cfclient':  relative(glob('src/cfclient/configs/*.json'), 'configs/') +  # noqa
-                 relative(glob('src/cfclient/configs/input/*.json'), 'configs/input/') +  # noqa
-                 relative(glob('src/cfclient/configs/log/*.json'), 'configs/log/') +  # noqa
-                 relative(glob('src/cfclient/resources/*'), 'resources/') +
-                 relative(glob('src/cfclient/*.png')),
+    'cfclient.ui.widgets': relative(glob('src/cfclient/ui/widgets/*.ui')),
+    'cfclient.ui.toolboxes': relative(glob('src/cfclient/ui/toolboxes/*.ui')),  # noqa
+    'cfclient.ui.dialogs': relative(glob('src/cfclient/ui/dialogs/*.ui')),
+    'cfclient': relative(glob('src/cfclient/configs/*.json'), 'configs/') +  # noqa
+                relative(glob('src/cfclient/configs/input/*.json'), 'configs/input/') +  # noqa
+                relative(glob('src/cfclient/configs/log/*.json'), 'configs/log/') +  # noqa
+                relative(glob('src/cfclient/resources/*'), 'resources/') +
+                relative(glob('src/cfclient/*.png')),
     '': ['README.md']
 }
 data_files = [
@@ -133,7 +133,8 @@ setup(
                                           'pyqtgraph>=0.10',
                                           'PyYAML==5.1.2',
                                           'quamash==0.6.1',
-                                          'qtm>=2.0.2'],
+                                          'qtm>=2.0.2',
+                                          ],
 
     # List of dev and qt dependencies
     # Pyqt5 5.13.2 is the last version that does not cause performance problems
@@ -141,7 +142,7 @@ setup(
     # $ pip install -e .[dev,qt5]
     extras_require={
         'dev': platform_dev_requires + [],
-        'qt5': ['PyQt5==5.13.2']
+        'qt5': ['PyQt5==5.14'],
     },
 
     package_data=package_data,

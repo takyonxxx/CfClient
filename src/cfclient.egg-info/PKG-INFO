@@ -14,3 +14,4 @@ Classifier: Programming Language :: Python :: 3.4
 Classifier: Programming Language :: Python :: 3.5
 Provides-Extra: dev
 Provides-Extra: qt5
+Provides-Extra: qt5w
