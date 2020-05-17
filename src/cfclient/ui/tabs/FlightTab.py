@@ -91,6 +91,8 @@ class FlightTab(Tab, flight_tab_class):
         self.tabWidget = tabWidget
         self.helper = helper
 
+        self.isConnected = False
+
         self.disconnectedSignal.connect(self.disconnected)
         self.connectionFinishedSignal.connect(self.connected)
         # Incomming signals
@@ -306,6 +308,8 @@ class FlightTab(Tab, flight_tab_class):
 
     def connected(self, linkURI):
         # IMU & THRUST
+        self.isConnected = True
+
         lg = LogConfig("Stabilizer", Config().get("ui_update_period"))
         lg.add_variable("stabilizer.roll", "float")
         lg.add_variable("stabilizer.pitch", "float")
@@ -363,6 +367,7 @@ class FlightTab(Tab, flight_tab_class):
                 logger.warning(str(e))
 
     def disconnected(self, linkURI):
+        self.isConnected = False
         self.ai.setRollPitch(0, 0)
         self.actualM1.setValue(0)
         self.actualM2.setValue(0)
@@ -451,6 +456,8 @@ class FlightTab(Tab, flight_tab_class):
         self.targetThrust.setText(("%0.2f %%" %
                                    self.thrustToPercentage(thrust)))
         self.thrustProgress.setValue(thrust)
+        if not self.isConnected:
+            self.ai.setRollPitch(-roll, pitch, self.is_visible())
 
     def setMotorLabelsEnabled(self, enabled):
         self.M1label.setEnabled(enabled)
@@ -528,9 +535,9 @@ class FlightTab(Tab, flight_tab_class):
             self.targetRoll.setEnabled(not enabled)
             self.targetPitch.setEnabled(not enabled)
         elif ((self.helper.inputDeviceReader.get_assisted_control() ==
-                JoystickReader.ASSISTED_CONTROL_HEIGHTHOLD) or
-                (self.helper.inputDeviceReader.get_assisted_control() ==
-                 JoystickReader.ASSISTED_CONTROL_HOVER)):
+               JoystickReader.ASSISTED_CONTROL_HEIGHTHOLD) or
+              (self.helper.inputDeviceReader.get_assisted_control() ==
+               JoystickReader.ASSISTED_CONTROL_HOVER)):
             self.targetThrust.setEnabled(not enabled)
             self.targetHeight.setEnabled(enabled)
         else:
@@ -544,7 +551,7 @@ class FlightTab(Tab, flight_tab_class):
 
     def alt1_updated(self, state):
         if state:
-            new_index = (self._ring_effect+1) % (self._ledring_nbr_effects+1)
+            new_index = (self._ring_effect + 1) % (self._ledring_nbr_effects + 1)
             self.helper.cf.param.set_value("ring.effect",
                                            str(new_index))
 
@@ -668,7 +675,7 @@ class FlightTab(Tab, flight_tab_class):
             else:
                 self._assist_mode_combo.setCurrentIndex(assistmodeComboIndex)
                 self._assist_mode_combo.currentIndexChanged.emit(
-                                                    assistmodeComboIndex)
+                    assistmodeComboIndex)
         except KeyError:
             defaultOption = 0
             if hoverPossible:

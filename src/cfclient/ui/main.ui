@@ -16,6 +16,9 @@
   <property name="statusTip">
    <string/>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
@@ -189,6 +192,10 @@
       </item>
       <item>
        <widget class="QGroupBox" name="groupBox">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(32, 74, 135);
+color: rgb(255, 255, 255);</string>
+        </property>
         <layout class="QHBoxLayout" stretch="0,0,1">
          <item>
           <widget class="QLabel" name="addressLabel">
@@ -249,7 +256,7 @@
            <x>0</x>
            <y>0</y>
            <width>852</width>
-           <height>506</height>
+           <height>503</height>
           </rect>
          </property>
          <property name="sizePolicy">
@@ -301,7 +308,7 @@
      <x>0</x>
      <y>0</y>
      <width>872</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

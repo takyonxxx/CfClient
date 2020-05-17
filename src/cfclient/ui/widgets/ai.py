@@ -101,13 +101,13 @@ class AttitudeIndicator(QtWidgets.QWidget):
         qp.setFont(font)
 
         # Draw the blue
-        qp.setPen(QtGui.QColor(0, 61, 144))
-        qp.setBrush(QtGui.QColor(0, 61, 144))
+        qp.setPen(QtGui.QColor(0, 51, 204))
+        qp.setBrush(QtGui.QColor(0, 51, 204))
         qp.drawRect(-w, h / 2, 3 * w, -3 * h)
 
         # Draw the marron
-        qp.setPen(QtGui.QColor(59, 41, 39))
-        qp.setBrush(QtGui.QColor(59, 41, 39))
+        qp.setPen(QtGui.QColor(102, 61, 0))
+        qp.setBrush(QtGui.QColor(102, 61, 0))
         qp.drawRect(-w, h / 2, 3 * w, 3 * h)
 
         pen = QtGui.QPen(QtGui.QColor(255, 255, 255), 1.5,
@@ -142,7 +142,7 @@ class AttitudeIndicator(QtWidgets.QWidget):
 
         qp.setWorldMatrixEnabled(False)
 
-        pen = QtGui.QPen(QtGui.QColor(0, 0, 0), 2,
+        pen = QtGui.QPen(QtGui.QColor(255, 255, 0), 2,
                          QtCore.Qt.SolidLine)
         qp.setBrush(QtGui.QColor(0, 0, 0))
         qp.setPen(pen)
