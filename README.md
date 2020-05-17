@@ -12,5 +12,7 @@ For more info see our [documentation](https://www.bitcraze.io/documentation/repo
 
 Uninstall cfclient if exists with ```python3 -m pip uninstall cfclient``` and install it in development mode by navigating into the repos root folder and installing the client in edit mode: ```python3 -m pip install -e .```
 or  ```pip3 install -r requirements.txt```
-Now you can edit and change codes.
+Now you can edit and change codes. 
+Run source with  ```./run_cfclient.sh start``` or ```python3 bin/cfclient```
+
 
