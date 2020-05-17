@@ -44,7 +44,7 @@ from cfclient.utils.zmq_param import ZMQParamAccess
 from cflib.crazyflie import Crazyflie
 from cflib.crazyflie.log import LogConfig
 from cflib.crazyflie.mem import MemoryElement
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtCore
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtCore import pyqtSlot
@@ -136,6 +136,8 @@ class MainUI(QtWidgets.QMainWindow, main_window_class):
             self.resize(size[0], size[1])
         except KeyError:
             pass
+
+        #self.setWindowState(QtCore.Qt.WindowMaximized)
 
         ######################################################
         # By lxrocks
@@ -327,7 +329,6 @@ class MainUI(QtWidgets.QMainWindow, main_window_class):
             item.toggled.connect(tab.toggleVisibility)
             self.tabsMenuItem.addAction(item)
             tabItems[tab.getTabName()] = item
-            logger.info("----> tabs [{}]".format(tab.getTabName()))
             self.loadedTabs.append(tab)
             if not tab.enabled:
                 item.setEnabled(False)
