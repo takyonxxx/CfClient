@@ -14,8 +14,8 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(46, 52, 54);
-color: rgb(255, 255, 255);</string>
+   <string notr="true">background-color: rgb(64, 63, 65);
+color: rgb(241, 238, 244);</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
@@ -65,6 +65,10 @@ color: rgb(255, 255, 255);</string>
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select what flightmode to use:&lt;/p&gt;&lt;p&gt; * Safe prevents crashing&lt;/p&gt;&lt;p&gt; * Crazy does not prevent crashing :)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
               <property name="editable">
                <bool>false</bool>
               </property>
@@ -111,6 +115,10 @@ color: rgb(255, 255, 255);</string>
               <property name="enabled">
                <bool>false</bool>
               </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
              </widget>
             </item>
             <item row="3" column="0">
@@ -122,6 +130,10 @@ color: rgb(255, 255, 255);</string>
             </item>
             <item row="3" column="1">
              <widget class="QDoubleSpinBox" name="targetCalRoll">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
               <property name="minimum">
                <double>-20.000000000000000</double>
               </property>
@@ -135,6 +147,10 @@ color: rgb(255, 255, 255);</string>
             </item>
             <item row="4" column="1">
              <widget class="QDoubleSpinBox" name="targetCalPitch">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
               <property name="minimum">
                <double>-20.000000000000000</double>
               </property>
@@ -289,19 +305,43 @@ color: rgb(255, 255, 255);</string>
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QDoubleSpinBox" name="maxThrust"/>
+             <widget class="QDoubleSpinBox" name="maxThrust">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
+             </widget>
             </item>
             <item row="3" column="1">
-             <widget class="QDoubleSpinBox" name="minThrust"/>
+             <widget class="QDoubleSpinBox" name="minThrust">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
+             </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QDoubleSpinBox" name="slewEnableLimit"/>
+             <widget class="QDoubleSpinBox" name="slewEnableLimit">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
+             </widget>
             </item>
             <item row="5" column="1">
-             <widget class="QDoubleSpinBox" name="thrustLoweringSlewRateLimit"/>
+             <widget class="QDoubleSpinBox" name="thrustLoweringSlewRateLimit">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
+             </widget>
             </item>
             <item row="1" column="1">
              <widget class="QSpinBox" name="maxYawRate">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
               <property name="minimum">
                <number>0</number>
               </property>
@@ -315,6 +355,10 @@ color: rgb(255, 255, 255);</string>
             </item>
             <item row="0" column="1">
              <widget class="QSpinBox" name="maxAngle">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
               <property name="minimum">
                <number>0</number>
               </property>
@@ -349,6 +393,10 @@ color: rgb(255, 255, 255);</string>
              <widget class="QComboBox" name="_led_ring_effect">
               <property name="enabled">
                <bool>false</bool>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
               </property>
              </widget>
             </item>
@@ -433,10 +481,17 @@ color: rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="2" column="4">
-               <widget class="QLineEdit" name="actualPitch"/>
+               <widget class="QLineEdit" name="actualPitch">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
+               </widget>
               </item>
               <item row="1" column="8" rowspan="5">
                <widget class="QProgressBar" name="actualM1">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
                 <property name="maximum">
                  <number>65535</number>
                 </property>
@@ -450,6 +505,9 @@ color: rgb(255, 255, 255);</string>
               </item>
               <item row="1" column="10" rowspan="5">
                <widget class="QProgressBar" name="actualM3">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
                 <property name="maximum">
                  <number>65535</number>
                 </property>
@@ -463,6 +521,9 @@ color: rgb(255, 255, 255);</string>
               </item>
               <item row="0" column="6">
                <widget class="QLabel" name="label_6">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
                 <property name="text">
                  <string>Thrust</string>
                 </property>
@@ -475,6 +536,9 @@ color: rgb(255, 255, 255);</string>
                <widget class="QLineEdit" name="actualHeight">
                 <property name="enabled">
                  <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
                 </property>
                 <property name="text">
                  <string/>
@@ -492,7 +556,11 @@ color: rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="3" column="2">
-               <widget class="QLineEdit" name="targetRoll"/>
+               <widget class="QLineEdit" name="targetRoll">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
+               </widget>
               </item>
               <item row="1" column="6" rowspan="5">
                <widget class="QProgressBar" name="thrustProgress">
@@ -507,6 +575,9 @@ color: rgb(255, 255, 255);</string>
                   <width>0</width>
                   <height>0</height>
                  </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
                 </property>
                 <property name="maximum">
                  <number>65600</number>
@@ -534,6 +605,9 @@ color: rgb(255, 255, 255);</string>
               </item>
               <item row="0" column="8">
                <widget class="QLabel" name="M1label">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
                 <property name="text">
                  <string>M1</string>
                 </property>
@@ -548,16 +622,26 @@ color: rgb(255, 255, 255);</string>
               </item>
               <item row="0" column="10">
                <widget class="QLabel" name="M3label">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
                 <property name="text">
                  <string>M3</string>
                 </property>
                </widget>
               </item>
               <item row="4" column="2">
-               <widget class="QLineEdit" name="targetYaw"/>
+               <widget class="QLineEdit" name="targetYaw">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
+               </widget>
               </item>
               <item row="1" column="9" rowspan="5">
                <widget class="QProgressBar" name="actualM2">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
                 <property name="maximum">
                  <number>65535</number>
                 </property>
@@ -570,7 +654,11 @@ color: rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="2" column="2">
-               <widget class="QLineEdit" name="targetPitch"/>
+               <widget class="QLineEdit" name="targetPitch">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
+               </widget>
               </item>
               <item row="2" column="0">
                <widget class="QLabel" name="label_11">
@@ -590,10 +678,17 @@ color: rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="4" column="4">
-               <widget class="QLineEdit" name="actualYaw"/>
+               <widget class="QLineEdit" name="actualYaw">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
+               </widget>
               </item>
               <item row="0" column="9">
                <widget class="QLabel" name="M2label">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
                 <property name="text">
                  <string>M2</string>
                 </property>
@@ -601,6 +696,9 @@ color: rgb(255, 255, 255);</string>
               </item>
               <item row="1" column="11" rowspan="5">
                <widget class="QProgressBar" name="actualM4">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
                 <property name="maximum">
                  <number>65535</number>
                 </property>
@@ -613,17 +711,37 @@ color: rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="1" column="2">
-               <widget class="QLineEdit" name="targetThrust"/>
+               <widget class="QLineEdit" name="targetThrust">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
+                <property name="text">
+                 <string>test</string>
+                </property>
+               </widget>
               </item>
               <item row="0" column="11">
                <widget class="QLabel" name="M4label">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
                 <property name="text">
                  <string>M4</string>
                 </property>
                </widget>
               </item>
               <item row="1" column="4">
-               <widget class="QLineEdit" name="actualThrust"/>
+               <widget class="QLineEdit" name="actualThrust">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
+               </widget>
               </item>
               <item row="0" column="12" rowspan="6">
                <layout class="QGridLayout" name="gridLayout_7"/>
@@ -636,12 +754,19 @@ color: rgb(255, 255, 255);</string>
                </widget>
               </item>
               <item row="3" column="4">
-               <widget class="QLineEdit" name="actualRoll"/>
+               <widget class="QLineEdit" name="actualRoll">
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
+                </property>
+               </widget>
               </item>
               <item row="5" column="2">
                <widget class="QLineEdit" name="targetHeight">
                 <property name="enabled">
                  <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">padding: 3px;</string>
                 </property>
                 <property name="text">
                  <string/>

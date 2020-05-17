@@ -193,8 +193,7 @@
       <item>
        <widget class="QGroupBox" name="groupBox">
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(32, 74, 135);
-color: rgb(255, 255, 255);</string>
+         <string notr="true"/>
         </property>
         <layout class="QHBoxLayout" stretch="0,0,1">
          <item>
@@ -255,8 +254,8 @@ color: rgb(255, 255, 255);</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>852</width>
-           <height>503</height>
+           <width>846</width>
+           <height>475</height>
           </rect>
          </property>
          <property name="sizePolicy">
@@ -289,6 +288,9 @@ color: rgb(255, 255, 255);</string>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="currentIndex">
              <number>-1</number>
             </property>
@@ -308,7 +310,7 @@ color: rgb(255, 255, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>872</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

@@ -1,15 +1,13 @@
-PyYAML==5.1.2
-appdirs>=1.4.0
+pysdl2==0.9.6
 cflib>=0.1.9
-pyqtgraph>=0.10
+appdirs>=1.4.0
 pyzmq==18.1.0
-qtm>=2.0.2
+pyqtgraph>=0.10
+PyYAML==5.1.2
 quamash==0.6.1
+qtm>=2.0.2
 
 [dev]
 
 [qt5]
 PyQt5==5.14
-
-[qt5w]
-PyQtWebEngine==5.14
