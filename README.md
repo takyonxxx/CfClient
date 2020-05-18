@@ -9,9 +9,15 @@ The communication with Crazyflie and the implementation of the CRTP protocol to 
 For more info see our [documentation](https://www.bitcraze.io/documentation/repository/crazyflie-clients-python/master/).
 
 # Running from source
+Linux:
+```sudo apt-get install python3 python3-pip python3-pyqt5 python3-pyqt5.qtsvg```</br>
+
+Mac Brew:
+```brew install python3 sdl sdl2 sdl_image sdl_mixer sdl_ttf libusb portmidi pyqt5```
 
 Uninstall cfclient if exists with ```pip3 uninstall cfclient``` and install it in development mode by navigating into the repos root folder and installing the client in edit mode: ```pip3 install -e .```
 or  ```pip3 install -r requirements.txt```
+
 Now you can edit and change codes. </br>
 Run source code with  ```./run_cfclient.sh start``` or ```python3 bin/cfclient```
 
