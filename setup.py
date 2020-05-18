@@ -134,6 +134,8 @@ setup(
                                           'PyYAML==5.1.2',
                                           'quamash==0.6.1',
                                           'qtm>=2.0.2',
+                                          "opencv-python",
+                                          "imutils",
                                           ],
 
     # List of dev and qt dependencies

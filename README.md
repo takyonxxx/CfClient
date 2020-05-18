@@ -15,4 +15,4 @@ or  ```pip3 install -r requirements.txt```
 Now you can edit and change codes. </br>
 Run source code with  ```./run_cfclient.sh start``` or ```python3 bin/cfclient```
 
-
+For GoPro ```sudo apt install ffmpeg```

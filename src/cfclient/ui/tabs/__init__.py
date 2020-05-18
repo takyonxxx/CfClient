@@ -29,10 +29,12 @@ Find all the available tabs so they can be loaded.
 Dropping a new .py file into this directory will automatically list and load
 it into the UI when it is started.
 """
+
 from .ConsoleTab import ConsoleTab
 # from .ExampleTab import ExampleTab
 from .FlightTab import FlightTab
 from .GpsTab import GpsTab
+from .GoProTab import GoProTab
 from .LEDTab import LEDTab
 from .LogBlockTab import LogBlockTab
 from .LogTab import LogTab
@@ -49,6 +51,7 @@ available = [
     # ExampleTab,
     FlightTab,
     GpsTab,
+    GoProTab,
     LEDTab,
     LogBlockTab,
     LogTab,
