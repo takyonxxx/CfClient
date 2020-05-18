@@ -134,7 +134,7 @@ setup(
                                           'PyYAML==5.1.2',
                                           'quamash==0.6.1',
                                           'qtm>=2.0.2',
-                                          "opencv-python",
+                                          "opencv-python==4.1.0.25",
                                           "imutils",
                                           ],
 

@@ -49,7 +49,6 @@ src/cfclient/ui/tabs/ConsoleTab.py
 src/cfclient/ui/tabs/ExampleTab.py
 src/cfclient/ui/tabs/FlightTab.py
 src/cfclient/ui/tabs/GoProCamera.py
-src/cfclient/ui/tabs/GoProTab.py
 src/cfclient/ui/tabs/GpsTab.py
 src/cfclient/ui/tabs/LEDTab.py
 src/cfclient/ui/tabs/LogBlockDebugTab.py
@@ -63,7 +62,6 @@ src/cfclient/ui/tabs/consoleTab.ui
 src/cfclient/ui/tabs/constants.py
 src/cfclient/ui/tabs/exampleTab.ui
 src/cfclient/ui/tabs/flightTab.ui
-src/cfclient/ui/tabs/goproTab.ui
 src/cfclient/ui/tabs/gpsTab.ui
 src/cfclient/ui/tabs/ledTab.ui
 src/cfclient/ui/tabs/locopositioning_tab.py
