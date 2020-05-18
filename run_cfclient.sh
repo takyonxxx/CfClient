@@ -13,7 +13,7 @@ function start() {
 
 function stop() {
   ps aux | grep -E "cfclient" | grep -v grep | awk '{print $2}'|grep -vw "$$" | xargs sudo kill -9
-	echo "Cfclient is stoped"
+	echo "CfClient is stoped"
 }
 
 for arg in "$@"; do

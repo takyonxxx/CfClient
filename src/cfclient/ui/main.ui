@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>872</width>
-    <height>671</height>
+    <width>1139</width>
+    <height>632</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,96 +20,23 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(85, 87, 83);
+color: rgb(255, 255, 255);</string>
+   </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="6">
-         <widget class="QLineEdit" name="_aff_volts">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>48</width>
-            <height>20</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>48</width>
-            <height>20</height>
-           </size>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-          </property>
-          <property name="readOnly">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QComboBox" name="interfaceCombo">
-          <property name="minimumSize">
-           <size>
-            <width>160</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="editable">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="connectButton">
-          <property name="minimumSize">
-           <size>
-            <width>60</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="scanButton">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="8">
+        <item row="0" column="11">
          <widget class="QLabel" name="linkQualityLabel">
           <property name="text">
            <string>Link Quality:</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="9">
+        <item row="0" column="12">
          <widget class="QProgressBar" name="linkQualityBar">
           <property name="minimumSize">
            <size>
@@ -137,14 +64,55 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="4">
+        <item row="0" column="0">
+         <widget class="QComboBox" name="interfaceCombo">
+          <property name="minimumSize">
+           <size>
+            <width>160</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="editable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="9">
+         <widget class="QLineEdit" name="_aff_volts">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>48</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>48</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="7">
          <widget class="QLabel" name="batteryLabel">
           <property name="text">
            <string>Battery:</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="5">
+        <item row="0" column="8">
          <widget class="QProgressBar" name="batteryBar">
           <property name="minimumSize">
            <size>
@@ -181,53 +149,80 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="7">
+        <item row="0" column="3">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="10">
          <widget class="QLabel" name="label">
           <property name="text">
            <string> volts </string>
           </property>
          </widget>
         </item>
+        <item row="0" column="4">
+         <widget class="QLabel" name="addressLabel">
+          <property name="text">
+           <string>Address:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="connectButton">
+          <property name="minimumSize">
+           <size>
+            <width>60</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="scanButton">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="HexSpinBox" name="address">
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="6">
+         <widget class="QCheckBox" name="autoReconnectCheckBox">
+          <property name="mouseTracking">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Auto Reconnect</string>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <layout class="QHBoxLayout" stretch="0,0,1">
-         <item>
-          <widget class="QLabel" name="addressLabel">
-           <property name="text">
-            <string>Address:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="HexSpinBox" name="address">
-           <property name="minimumSize">
-            <size>
-             <width>140</width>
-             <height>0</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="autoReconnectCheckBox">
-           <property name="mouseTracking">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string>Auto Reconnect</string>
-           </property>
-           <property name="checked">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
       </item>
       <item>
        <widget class="QScrollArea" name="scrollArea">
@@ -254,8 +249,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>846</width>
-           <height>475</height>
+           <width>1119</width>
+           <height>537</height>
           </rect>
          </property>
          <property name="sizePolicy">
@@ -309,8 +304,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>872</width>
-     <height>22</height>
+     <width>1139</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

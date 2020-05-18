@@ -30,27 +30,25 @@ The flight control tab shows telemetry data and flight settings.
 """
 
 import logging
-import time
-from threading import Thread
 
-import imutils
-from PyQt5.uic.uiparser import QtCore
-
-import cfclient
 from PyQt5 import uic
 from PyQt5.QtCore import Qt, pyqtSlot, pyqtSignal
+from PyQt5.QtGui import QImage, QPixmap
+from PyQt5.QtWidgets import QMessageBox, QApplication
 
+import time
+from threading import Thread
+import imutils
+import cv2
+import cfclient
 from cfclient.ui.tabs import GoProCamera, constants
 from cfclient.ui.widgets.ai import AttitudeIndicator
 from cfclient.utils.config import Config
 from cflib.crazyflie.log import LogConfig
 from cfclient.utils.input import JoystickReader
-from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtWidgets import QMessageBox, QApplication
 from cfclient.ui.tab import Tab
 from imutils.video import FileVideoStream
 from imutils.video import FPS
-import cv2
 
 LOG_NAME_ESTIMATED_Z = "stateEstimate.z"
 
@@ -214,6 +212,7 @@ class FlightTab(Tab, flight_tab_class):
 
         self.ai = AttitudeIndicator()
         self.verticalAttitudeIndicator.addWidget(self.ai)
+
         self.splitter.setSizes([1000, 1])
 
         self.targetCalPitch.setValue(Config().get("trim_pitch"))
@@ -231,41 +230,49 @@ class FlightTab(Tab, flight_tab_class):
             self._limiting_updated.emit)
         self._limiting_updated.connect(self._set_limiting_enabled)
 
-        self.stream_start_thread = Thread(target=self.start_stream, args=())
-        self.stream_stop_thread = Thread(target=self.stop_stream, args=())
-        self.stream_play_thread = Thread(target=self.play_stream, args=())
+        self.threads = []
+
         self.goproCamera = None
         self.fvs = None
         self.fps = None
         self.stop = False
+        self.video_window.setVisible(False)
 
         self.checkEnableGoPro.stateChanged.connect(self.click_enable_gopro)
 
     def click_enable_gopro(self, state):
         if self.checkEnableGoPro.isChecked():
+            self.checkEnableGoPro.setText("EnableGopro. Trying to connect GoPro.")
+            self.stop = False
             self.gopro_connect()
         else:
+            self.checkEnableGoPro.setText("EnableGopro")
+            self.stop = True
+            self.video_window.setVisible(False)
             self.gopro_disconnect()
 
     def start_stream(self):
         self.goproCamera.livestream("stop")
-        self.goproCamera.stream("udp://@127.0.0.1:10000", quality="low")
+        self.goproCamera.stream("udp://@127.0.0.1:10000", quality="high")
 
     def stop_stream(self):
-        # stop the timer and display FPS information
         self.goproCamera.livestream("stop")
-        self.stream_start_thread.join()
-        self.goproCamera = None
-        self.textConsole.setText(str(""))
+
+    def stop_threads(self):
+        while len(self.threads) > 0:
+            for thread in self.threads:
+                if thread.is_alive():
+                    thread.join()
+                    self.threads.remove(thread)
 
     def play_stream(self):
 
         self.fvs = FileVideoStream('udp://@127.0.0.1:10000').start()
-        time.sleep(1.0)
-        # start the FPS timer
         self.fps = FPS().start()
 
         while self.fvs.running():
+            if self.stop:
+                break
 
             try:
                 frame = self.fvs.read()
@@ -275,13 +282,14 @@ class FlightTab(Tab, flight_tab_class):
                 bytesPerLine = 3 * width
                 qimg = QImage(frame.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
                 pixmap = QPixmap(qimg)
+                if not self.video_window.isVisible():
+                    self.checkEnableGoPro.setText("EnableGopro")
+                    self.video_window.setVisible(True)
+
+                self.video_window.setPixmap(pixmap)
+
             except Exception as exc:
                 pass
-
-            self.video_window.setPixmap(pixmap)
-
-            if self.stop:
-                break
 
             if self.fvs.Q.qsize() < 2:  # If we are low on frames, give time to producer
                 time.sleep(0.001)  # Ensures producer runs now, so 2 is sufficient
@@ -295,17 +303,26 @@ class FlightTab(Tab, flight_tab_class):
         cv2.destroyAllWindows()
 
     def gopro_connect(self):
+
+        stream_stop_threads = Thread(target=self.stop_threads, args=())
+        stream_stop_threads.start()
+
         if not self.goproCamera:
             self.goproCamera = GoProCamera.GoPro(constants.gpcontrol)
 
-            self.stop = False
-            self.stream_start_thread.start()
-            self.play_stream()
+        stream_start_threads = Thread(target=self.start_stream, args=())
+        stream_play_thread = Thread(target=self.play_stream, args=())
+        self.threads.append(stream_start_threads)
+        self.threads.append(stream_play_thread)
+
+        stream_start_threads.start()
+        stream_play_thread.start()
 
     def gopro_disconnect(self):
-        if self.goproCamera:
-            self.stop = True
-            self.stream_stop_thread.start()
+        self.stop_stream()
+        stream_stop_threads = Thread(target=self.stop_threads, args=())
+        stream_stop_threads.start()
+        self.goproCamera = None
 
     def _set_enable_client_xmode(self, name, value):
         if eval(value) <= 128:

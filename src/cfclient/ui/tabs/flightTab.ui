@@ -29,6 +29,25 @@ color: rgb(241, 238, 244);</string>
         <enum>QLayout::SetMaximumSize</enum>
        </property>
        <item>
+        <widget class="QCheckBox" name="checkEnableGoPro">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(85, 87, 83);
+color: rgb(255, 255, 255);
+padding: 3px;</string>
+         </property>
+         <property name="text">
+          <string>EnableGopro</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="video_window">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QGroupBox" name="groupBox_2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -54,6 +73,144 @@ color: rgb(241, 238, 244);</string>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <layout class="QGridLayout" name="gridLayout_3">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Flight mode</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <spacer name="verticalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Maximum</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="4" column="1">
+             <widget class="QDoubleSpinBox" name="targetCalPitch">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
+              <property name="minimum">
+               <double>-20.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>20.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.200000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QCheckBox" name="crazyflieXModeCheckbox">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Crazyflie X-mode</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QDoubleSpinBox" name="targetCalRoll">
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
+              <property name="minimum">
+               <double>-20.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>20.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.200000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QRadioButton" name="angularPidRadioButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Attitude control</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Pitch Trim</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QRadioButton" name="ratePidRadioButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Rate control</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Assist mode</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="clientXModeCheckbox">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Client X-mode</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QComboBox" name="_assist_mode_combo">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(227, 224, 229);
+color: rgb(21, 20, 21);</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Roll Trim</string>
+              </property>
+             </widget>
+            </item>
             <item row="1" column="1">
              <widget class="QComboBox" name="flightModeCombo">
               <property name="minimumSize">
@@ -85,144 +242,6 @@ color: rgb(21, 20, 21);</string>
                 <string>Advanced</string>
                </property>
               </item>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <spacer name="verticalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeType">
-               <enum>QSizePolicy::Maximum</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_5">
-              <property name="text">
-               <string>Assist mode</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QComboBox" name="_assist_mode_combo">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(227, 224, 229);
-color: rgb(21, 20, 21);</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="label_2">
-              <property name="text">
-               <string>Roll Trim</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QDoubleSpinBox" name="targetCalRoll">
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(227, 224, 229);
-color: rgb(21, 20, 21);</string>
-              </property>
-              <property name="minimum">
-               <double>-20.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>20.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.200000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QDoubleSpinBox" name="targetCalPitch">
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(227, 224, 229);
-color: rgb(21, 20, 21);</string>
-              </property>
-              <property name="minimum">
-               <double>-20.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>20.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.200000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>Pitch Trim</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_4">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Flight mode</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QCheckBox" name="crazyflieXModeCheckbox">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>Crazyflie X-mode</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QCheckBox" name="clientXModeCheckbox">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>Client X-mode</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="0">
-             <widget class="QRadioButton" name="angularPidRadioButton">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>Attitude control</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="1">
-             <widget class="QRadioButton" name="ratePidRadioButton">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>Rate control</string>
-              </property>
              </widget>
             </item>
            </layout>
@@ -418,25 +437,6 @@ color: rgb(21, 20, 21);</string>
              </widget>
             </item>
            </layout>
-          </item>
-          <item row="1" column="0">
-           <widget class="QCheckBox" name="checkEnableGoPro">
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(211, 215, 207);
-color: rgb(0, 0, 0);
-padding: 3px;</string>
-            </property>
-            <property name="text">
-             <string>EnableGopro</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="video_window">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
           </item>
          </layout>
         </widget>

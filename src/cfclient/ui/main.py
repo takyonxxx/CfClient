@@ -27,6 +27,8 @@
 The main file for the Crazyflie control application.
 """
 import logging
+import os
+import subprocess
 import sys
 
 import cfclient
@@ -131,13 +133,13 @@ class MainUI(QtWidgets.QMainWindow, main_window_class):
         self.setupUi(self)
 
         # Restore window size if present in the config file
-        try:
+        """try:
             size = Config().get("window_size")
             self.resize(size[0], size[1])
         except KeyError:
-            pass
+            pass"""
 
-        #self.setWindowState(QtCore.Qt.WindowMaximized)
+        self.setWindowState(QtCore.Qt.WindowMaximized)
 
         ######################################################
         # By lxrocks
@@ -251,15 +253,15 @@ class MainUI(QtWidgets.QMainWindow, main_window_class):
 
         self.joystickReader.input_updated.add_callback(
             lambda *args: self._disable_input or
-            self.cf.commander.send_setpoint(*args))
+                          self.cf.commander.send_setpoint(*args))
 
         self.joystickReader.assisted_input_updated.add_callback(
             lambda *args: self._disable_input or
-            self.cf.commander.send_velocity_world_setpoint(*args))
+                          self.cf.commander.send_velocity_world_setpoint(*args))
 
         self.joystickReader.heighthold_input_updated.add_callback(
             lambda *args: self._disable_input or
-            self.cf.commander.send_zdistance_setpoint(*args))
+                          self.cf.commander.send_zdistance_setpoint(*args))
 
         self.joystickReader.hover_input_updated.add_callback(
             self.cf.commander.send_hover_setpoint)
@@ -843,12 +845,12 @@ class MainUI(QtWidgets.QMainWindow, main_window_class):
                  QDir.toNativeSeparators(cfclient.config_path)))
 
     def closeAppRequest(self):
+
+        subprocess.Popen("./run_cfclient.sh stop", shell=True)
         self.close()
-        sys.exit(0)
 
 
 class ScannerThread(QThread):
-
     scanSignal = pyqtSignal(object)
     interfaceFoundSignal = pyqtSignal(object)
 

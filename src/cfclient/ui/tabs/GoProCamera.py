@@ -119,8 +119,8 @@ class GoPro:
             return self._request("gp/gpControl/setting", param, value)
         except (HTTPError, URLError) as error:
             return error
-        except timeout:
-            return error
+        except timeout as ex:
+            return ex
 
     def gpControlCommand(self, param):
         """sends Parameter gpControl/command"""
@@ -1165,28 +1165,23 @@ class GoPro:
                 return self.sendCamera("PV", "00")
 
     def kill_port(self, port):
-        errMsg = 'Enter integer value for port number'
         try:
             port = int(port)
             cmd = 'lsof -t -i:{0}'.format(port)
             pid = subprocess.check_output(cmd, shell=True)
             pid = int(pid)
             if pid:
-                killcmd = 'kill -9 {0}'.format(pid) if pid else None
-                isKilled = os.system('kill -9 {0}'.format(pid)) if pid else None
-                if isKilled == 0:
+                killed = os.system('kill -9 {0}'.format(pid)) if pid else None
+                if killed == 0:
                     print("Port {0} is free. Processs {1} killed successfully".format(port, pid))
                 else:
-                    print(
-                        "Cannot free port {0}.Failed to kill process {1}, err code:{2}".format(port, pid, isKilled))
+                    print("Cannot free port {0}.Failed to kill process {1}, err code:{2}"
+                          .format(port, pid, killed))
 
-        except ValueError:
-            pid = None
-            print(errMsg)
         except Exception as e:
-            print("No process running on port {0}".format(port))
+            print("Error Kill Port {}".format(e))
 
-    def stream(self, addr, quality=""):
+    def stream(self, addr, quality="high"):
         """Starts a FFmpeg instance for streaming to an address
         addr: Address to stream to
         quality: high/medium/low
@@ -1209,9 +1204,19 @@ class GoPro:
                     self.streamSettings("1000000", "4")
                 elif quality == "low":
                     self.streamSettings("250000", "0")
-            subprocess.Popen("ffmpeg -loglevel panic -f mpegts -i udp://" +
-                             ":8554 -b 64k -r 24 -f mpegts " + addr, shell=True)
+
+            subprocess.Popen("ffmpeg -loglevel panic -fflags nobuffer -preset veryfast " +
+                             "-f mpegts -i udp://@:8554 " +
+                             "-b:v 64k -minrate 96k -maxrate 96k -bufsize 4096k " +
+                             "-f mpegts -vcodec copy " + addr + " -hide_banner", shell=True)
+
+            """subprocess.Popen("ffmpeg -loglevel info  "
+                             "-f mpegts -i udp://@:8554 " +
+                             "-vcodec h264 -b:v 200k -minrate 150k -maxrate 150k -bufsize 8192k "
+                             "-f mpegts " + addr, shell=True)"""
+
             self.KeepAlive()
+
         elif self.whichCam() == constants.Camera.Interface.Auth:
             subprocess.Popen("ffmpeg -i http://" +
                              "live/amba.m3u8 -f mpegts " + addr, shell=True)
