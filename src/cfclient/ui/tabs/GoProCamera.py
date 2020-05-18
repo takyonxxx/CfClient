@@ -1164,11 +1164,35 @@ class GoPro:
             else:
                 return self.sendCamera("PV", "00")
 
+    def kill_port(self, port):
+        errMsg = 'Enter integer value for port number'
+        try:
+            port = int(port)
+            cmd = 'lsof -t -i:{0}'.format(port)
+            pid = subprocess.check_output(cmd, shell=True)
+            pid = int(pid)
+            if pid:
+                killcmd = 'kill -9 {0}'.format(pid) if pid else None
+                isKilled = os.system('kill -9 {0}'.format(pid)) if pid else None
+                if isKilled == 0:
+                    print("Port {0} is free. Processs {1} killed successfully".format(port, pid))
+                else:
+                    print(
+                        "Cannot free port {0}.Failed to kill process {1}, err code:{2}".format(port, pid, isKilled))
+
+        except ValueError:
+            pid = None
+            print(errMsg)
+        except Exception as e:
+            print("No process running on port {0}".format(port))
+
     def stream(self, addr, quality=""):
         """Starts a FFmpeg instance for streaming to an address
         addr: Address to stream to
         quality: high/medium/low
         """
+
+        self.kill_port("8554")
         self.livestream("start")
         if self.whichCam() == constants.Camera.Interface.GPControl:
             if "HERO4" in self.infoCamera("model_name"):
@@ -1185,8 +1209,8 @@ class GoPro:
                     self.streamSettings("1000000", "4")
                 elif quality == "low":
                     self.streamSettings("250000", "0")
-            """os.system("ffmpeg -f mpegts -i udp://" +
-                      ":8554 -b 800k -r 30 -f mpegts " + addr)"""
+            os.system("ffmpeg -f mpegts -i udp://" +
+                      ":8554 -b 800k -r 30 -f mpegts " + addr)
             self.KeepAlive()
         elif self.whichCam() == constants.Camera.Interface.Auth:
             os.system("ffmpeg -i http://" +

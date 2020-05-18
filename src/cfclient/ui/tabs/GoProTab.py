@@ -78,7 +78,7 @@ class GoProTab(Tab, gopro_tab_class):
 
     def start_stream(self):
         self.goproCamera.livestream("stop")
-        self.goproCamera.stream("udp://@127.0.0.1:10000", quality="high")
+        self.goproCamera.stream("udp://@127.0.0.1:10000", quality="low")
 
     def stop_stream(self):
         # stop the timer and display FPS information
@@ -96,27 +96,29 @@ class GoProTab(Tab, gopro_tab_class):
 
         while self.fvs.running():
 
-            frame = self.fvs.read()
-            frame = imutils.resize(frame, width=self.video_window.width())
-            # frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            height, width, channel = frame.shape
-            bytesPerLine = 3 * width
-            convertToQtFormat = QImage(frame.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
+            try:
+                frame = self.fvs.read()
+                frame = imutils.resize(frame, width=self.video_window.width())
+                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                height, width, channel = frame.shape
+                bytesPerLine = 3 * width
+                qimg = QImage(frame.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
+                pixmap = QPixmap(qimg)
+            except Exception as exc:
+                pass
 
-            pixmap = QPixmap(convertToQtFormat)
-            QApplication.processEvents()
             self.video_window.setPixmap(pixmap)
             self.textConsole.setText("Queue Size: {}".format(self.fvs.Q.qsize()))
 
             if self.stop:
                 break
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
-
             if self.fvs.Q.qsize() < 2:  # If we are low on frames, give time to producer
                 time.sleep(0.001)  # Ensures producer runs now, so 2 is sufficient
+
             self.fps.update()
+
+            QApplication.processEvents()
 
         self.fps.stop()
         self.fvs.stop()
@@ -131,7 +133,6 @@ class GoProTab(Tab, gopro_tab_class):
             self._gopro_connect_btn.setText("Disconnect")
             self.stop = False
             self.textConsole.setText(str(self.goproCamera.infoCamera()))
-
             self.stream_start_thread.start()
             self.play_stream()
 
