@@ -30,20 +30,27 @@ The flight control tab shows telemetry data and flight settings.
 """
 
 import logging
+import time
+from threading import Thread
 
-from PyQt5 import uic
-from PyQt5.QtCore import Qt, pyqtSlot, pyqtSignal
-from PyQt5.QtWidgets import QMessageBox
+import imutils
+from PyQt5.uic.uiparser import QtCore
 
 import cfclient
-from cfclient.ui.widgets.ai import AttitudeIndicator
+from PyQt5 import uic
+from PyQt5.QtCore import Qt, pyqtSlot, pyqtSignal
 
+from cfclient.ui.tabs import GoProCamera, constants
+from cfclient.ui.widgets.ai import AttitudeIndicator
 from cfclient.utils.config import Config
 from cflib.crazyflie.log import LogConfig
-
 from cfclient.utils.input import JoystickReader
-
+from PyQt5.QtGui import QImage, QPixmap
+from PyQt5.QtWidgets import QMessageBox, QApplication
 from cfclient.ui.tab import Tab
+from imutils.video import FileVideoStream
+from imutils.video import FPS
+import cv2
 
 LOG_NAME_ESTIMATED_Z = "stateEstimate.z"
 
@@ -206,7 +213,7 @@ class FlightTab(Tab, flight_tab_class):
         self.logAltHold = None
 
         self.ai = AttitudeIndicator()
-        self.verticalLayout_4.addWidget(self.ai)
+        self.verticalAttitudeIndicator.addWidget(self.ai)
         self.splitter.setSizes([1000, 1])
 
         self.targetCalPitch.setValue(Config().get("trim_pitch"))
@@ -223,6 +230,82 @@ class FlightTab(Tab, flight_tab_class):
         self.helper.inputDeviceReader.limiting_updated.add_callback(
             self._limiting_updated.emit)
         self._limiting_updated.connect(self._set_limiting_enabled)
+
+        self.stream_start_thread = Thread(target=self.start_stream, args=())
+        self.stream_stop_thread = Thread(target=self.stop_stream, args=())
+        self.stream_play_thread = Thread(target=self.play_stream, args=())
+        self.goproCamera = None
+        self.fvs = None
+        self.fps = None
+        self.stop = False
+
+        self.checkEnableGoPro.stateChanged.connect(self.click_enable_gopro)
+
+    def click_enable_gopro(self, state):
+        if self.checkEnableGoPro.isChecked():
+            self.gopro_connect()
+        else:
+            self.gopro_disconnect()
+
+    def start_stream(self):
+        self.goproCamera.livestream("stop")
+        self.goproCamera.stream("udp://@127.0.0.1:10000", quality="low")
+
+    def stop_stream(self):
+        # stop the timer and display FPS information
+        self.goproCamera.livestream("stop")
+        self.stream_start_thread.join()
+        self.goproCamera = None
+        self.textConsole.setText(str(""))
+
+    def play_stream(self):
+
+        self.fvs = FileVideoStream('udp://@127.0.0.1:10000').start()
+        time.sleep(1.0)
+        # start the FPS timer
+        self.fps = FPS().start()
+
+        while self.fvs.running():
+
+            try:
+                frame = self.fvs.read()
+                frame = imutils.resize(frame, width=self.video_window.width())
+                #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                height, width, channel = frame.shape
+                bytesPerLine = 3 * width
+                qimg = QImage(frame.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
+                pixmap = QPixmap(qimg)
+            except Exception as exc:
+                pass
+
+            self.video_window.setPixmap(pixmap)
+
+            if self.stop:
+                break
+
+            if self.fvs.Q.qsize() < 2:  # If we are low on frames, give time to producer
+                time.sleep(0.001)  # Ensures producer runs now, so 2 is sufficient
+
+            self.fps.update()
+
+            QApplication.processEvents()
+
+        self.fps.stop()
+        self.fvs.stop()
+        cv2.destroyAllWindows()
+
+    def gopro_connect(self):
+        if not self.goproCamera:
+            self.goproCamera = GoProCamera.GoPro(constants.gpcontrol)
+
+            self.stop = False
+            self.stream_start_thread.start()
+            self.play_stream()
+
+    def gopro_disconnect(self):
+        if self.goproCamera:
+            self.stop = True
+            self.stream_stop_thread.start()
 
     def _set_enable_client_xmode(self, name, value):
         if eval(value) <= 128:
