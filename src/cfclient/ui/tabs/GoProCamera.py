@@ -1209,12 +1209,12 @@ class GoPro:
                     self.streamSettings("1000000", "4")
                 elif quality == "low":
                     self.streamSettings("250000", "0")
-            os.system("ffmpeg -f mpegts -i udp://" +
-                      ":8554 -b 800k -r 30 -f mpegts " + addr)
+            subprocess.Popen("ffmpeg -loglevel panic -f mpegts -i udp://" +
+                             ":8554 -b 64k -r 24 -f mpegts " + addr, shell=True)
             self.KeepAlive()
         elif self.whichCam() == constants.Camera.Interface.Auth:
-            os.system("ffmpeg -i http://" +
-                      "live/amba.m3u8 -f mpegts " + addr)
+            subprocess.Popen("ffmpeg -i http://" +
+                             "live/amba.m3u8 -f mpegts " + addr, shell=True)
 
     def streamSettings(self, bitrate, resolution):
         """Sets stream settings"""

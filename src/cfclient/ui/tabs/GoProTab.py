@@ -99,7 +99,7 @@ class GoProTab(Tab, gopro_tab_class):
             try:
                 frame = self.fvs.read()
                 frame = imutils.resize(frame, width=self.video_window.width())
-                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 height, width, channel = frame.shape
                 bytesPerLine = 3 * width
                 qimg = QImage(frame.data, width, height, bytesPerLine, QImage.Format_RGB888).rgbSwapped()
