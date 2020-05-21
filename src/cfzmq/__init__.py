@@ -151,6 +151,7 @@ class _SrvThread(Thread):
         resp["interfaces"] = []
         for i in interfaces:
             resp["interfaces"].append({"uri": i[0], "info": i[1]})
+            print("Interface with URI [%s] found and name/comment [%s]" % (i[0], i[1]))
         return resp
 
     def _handle_connect(self, uri):

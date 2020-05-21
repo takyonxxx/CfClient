@@ -184,7 +184,7 @@ class AttitudeIndicator(QtWidgets.QWidget):
             a = '\u00b0'
             # height
             qp.drawText(w - fh * 10, fh / 2 + 50, str(round(self.hoverHeight, 2)) + " m")
-            qp.drawText(w - fh * 10, fh / 2 + 80, str(round(self.asl, 2)) + " m")
+            qp.drawText(w - fh * 10, fh / 2 + 80, str(round(self.asl, 2)) + " m asl")
             qp.drawText(w - fh * 10, fh / 2 + 110, str(round(self.pressure, 2)) + " kPa")
             qp.drawText(w - fh * 10, fh / 2 + 140, str(round(self.temp, 2)) + " " + a + "C")
 

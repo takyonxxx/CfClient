@@ -133,13 +133,13 @@ class MainUI(QtWidgets.QMainWindow, main_window_class):
         self.setupUi(self)
 
         # Restore window size if present in the config file
-        """try:
+        try:
             size = Config().get("window_size")
             self.resize(size[0], size[1])
         except KeyError:
-            pass"""
+            pass
 
-        self.setWindowState(QtCore.Qt.WindowMaximized)
+        #self.setWindowState(QtCore.Qt.WindowMaximized)
 
         ######################################################
         # By lxrocks

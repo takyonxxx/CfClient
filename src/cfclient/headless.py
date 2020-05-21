@@ -56,8 +56,7 @@ class HeadlessClient():
 
         self._jr = JoystickReader(do_device_discovery=False)
 
-        self._cf = Crazyflie(ro_cache=None,
-                             rw_cache=cfclient.config_path + "/cache")
+        self._cf = Crazyflie(ro_cache=None, rw_cache=cfclient.config_path + "/cache")
 
         signal.signal(signal.SIGINT, signal.SIG_DFL)
 

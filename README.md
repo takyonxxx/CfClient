@@ -23,4 +23,7 @@ or  ```pip3 install -r requirements.txt```
 Now you can edit and change codes. </br>
 Run source code with  ```./run_cfclient.sh start``` or ```python3 bin/cfclient```
 
+If you want to use client with usb connection, you should add rights for the user,
+visit: [usb permissions](https://www.bitcraze.io/documentation/repository/crazyflie-lib-python/0.1.9/usb_permissions)
+
 For GoPro ```sudo apt install ffmpeg```
