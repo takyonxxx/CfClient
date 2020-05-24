@@ -27,7 +27,6 @@
 The main file for the Crazyflie control application.
 """
 import logging
-import os
 import subprocess
 import sys
 

@@ -174,7 +174,7 @@ class AttitudeIndicator(QtWidgets.QWidget):
                          QtCore.Qt.SolidLine)
         qp.setBrush(QtGui.QColor(255, 255, 255))
         qp.setPen(pen)
-        fh = max(7, h / 50)
+        fh = max(13, h / 50)
         font = QtGui.QFont('Sans', fh, QtGui.QFont.Light)
         qp.setFont(font)
         qp.resetTransform()
