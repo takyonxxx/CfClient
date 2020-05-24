@@ -136,6 +136,7 @@ setup(
                                           'qtm>=2.0.2',
                                           "opencv-python==4.1.0.25",
                                           "imutils",
+                                          "pygatt==4.0.5"
                                           ],
 
     # List of dev and qt dependencies
