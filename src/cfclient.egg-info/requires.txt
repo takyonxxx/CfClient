@@ -3,7 +3,6 @@ appdirs>=1.4.0
 cflib>=0.1.9
 imutils
 opencv-python==4.1.0.25
-pygatt==4.0.5
 pyqtgraph>=0.10
 pyzmq==18.1.0
 qtm>=2.0.2

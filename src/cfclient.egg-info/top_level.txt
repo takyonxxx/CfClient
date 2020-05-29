@@ -1,3 +1,4 @@
 cfclient
+cflib
 cfloader
 cfzmq
