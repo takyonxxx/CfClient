@@ -25,61 +25,24 @@
 color: rgb(255, 255, 255);</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="0" column="0" colspan="2">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="2">
+         <widget class="QPushButton" name="scanButton">
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="11">
          <widget class="QLabel" name="linkQualityLabel">
           <property name="text">
            <string>Link Quality:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="12">
-         <widget class="QProgressBar" name="linkQualityBar">
-          <property name="minimumSize">
-           <size>
-            <width>30</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>100</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="maximum">
-           <number>100</number>
-          </property>
-          <property name="value">
-           <number>0</number>
-          </property>
-          <property name="textVisible">
-           <bool>true</bool>
-          </property>
-          <property name="format">
-           <string>Link quality %p%</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QComboBox" name="interfaceCombo">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>160</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="editable">
-           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -111,10 +74,93 @@ color: rgb(255, 255, 255);</string>
           </property>
          </widget>
         </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="connectButton">
+          <property name="minimumSize">
+           <size>
+            <width>60</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string/>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="7">
          <widget class="QLabel" name="batteryLabel">
           <property name="text">
            <string>Battery:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="12">
+         <widget class="QProgressBar" name="linkQualityBar">
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+          <property name="textVisible">
+           <bool>true</bool>
+          </property>
+          <property name="format">
+           <string>Link quality %p%</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="6">
+         <widget class="QCheckBox" name="autoReconnectCheckBox">
+          <property name="mouseTracking">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Auto Reconnect</string>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="5">
+         <widget class="HexSpinBox" name="address">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>0</height>
+           </size>
           </property>
          </widget>
         </item>
@@ -161,23 +207,22 @@ color: rgb(255, 255, 255);</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="0" column="0">
+         <widget class="QComboBox" name="interfaceCombo">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
-          <property name="sizeHint" stdset="0">
+          <property name="minimumSize">
            <size>
-            <width>40</width>
-            <height>20</height>
+            <width>160</width>
+            <height>0</height>
            </size>
           </property>
-         </spacer>
-        </item>
-        <item row="0" column="10">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string> volts </string>
+          <property name="editable">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -188,55 +233,10 @@ color: rgb(255, 255, 255);</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="connectButton">
-          <property name="minimumSize">
-           <size>
-            <width>60</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="toolTip">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="scanButton">
-          <property name="minimumSize">
-           <size>
-            <width>50</width>
-            <height>0</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="5">
-         <widget class="HexSpinBox" name="address">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>0</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="6">
-         <widget class="QCheckBox" name="autoReconnectCheckBox">
-          <property name="mouseTracking">
-           <bool>false</bool>
-          </property>
+        <item row="0" column="10">
+         <widget class="QLabel" name="label">
           <property name="text">
-           <string>Auto Reconnect</string>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
+           <string> volts </string>
           </property>
          </widget>
         </item>
@@ -267,8 +267,8 @@ color: rgb(255, 255, 255);</string>
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>1113</width>
-           <height>509</height>
+           <width>1119</width>
+           <height>507</height>
           </rect>
          </property>
          <property name="sizePolicy">
@@ -315,6 +315,24 @@ color: rgb(255, 255, 255);</string>
       </item>
      </layout>
     </item>
+    <item row="1" column="0">
+     <widget class="QLineEdit" name="hexEdit">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(243, 243, 243);
+color: rgb(46, 52, 54);</string>
+      </property>
+      <property name="text">
+       <string>dd 00</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="sendHexButton">
+      <property name="text">
+       <string>Send Hex</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -323,7 +341,7 @@ color: rgb(255, 255, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>1139</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

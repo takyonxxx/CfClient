@@ -312,6 +312,7 @@ class Crazyflie():
 
         """
         self._send_lock.acquire()
+
         if self.link is not None:
             if len(expected_reply) > 0 and not resend and \
                     self.link.needs_resending:

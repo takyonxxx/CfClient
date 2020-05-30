@@ -31,12 +31,30 @@ color: rgb(241, 238, 244);</string>
        <item>
         <widget class="QCheckBox" name="checkEnableGoPro">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(64, 63, 65);
-color: rgb(255, 255, 255);
+          <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(78, 154, 6);
 padding: 3px;</string>
          </property>
          <property name="text">
           <string>EnableGopro</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(243, 243, 243);
+color: rgb(46, 52, 54);</string>
+         </property>
+         <property name="text">
+          <string>dd:00</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="sendHexButton">
+         <property name="text">
+          <string>Send Hex</string>
          </property>
         </widget>
        </item>

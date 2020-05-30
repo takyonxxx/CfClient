@@ -144,7 +144,19 @@ class UsbDriver(CRTPDriver):
         try:
             dataOut = (pk.header,)
             dataOut += pk.datat
-            self.cfusb.send_packet(dataOut)
+
+            if pk.header is 0:
+                hex_data = ":".join("{:02x}".format(x) for x in pk.datat)
+                print("Send {}".format(hex_data))
+                self.cfusb.send_packet(pk.datat)
+            else:
+                """hex_data = ":".join("{:02x}".format(x) for x in pk.data)
+                header = "".join("{:02x}".format(pk.get_header()))
+                if not str(header).startswith("3c"):
+                    print("Send {}".format(header + ":" + hex_data))"""
+
+                self.cfusb.send_packet(dataOut)
+
         except queue.Full:
             if self.link_error_callback:
                 self.link_error_callback(

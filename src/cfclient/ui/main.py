@@ -138,7 +138,7 @@ class MainUI(QtWidgets.QMainWindow, main_window_class):
         except KeyError:
             pass
 
-        #self.setWindowState(QtCore.Qt.WindowMaximized)
+        # self.setWindowState(QtCore.Qt.WindowMaximized)
 
         ######################################################
         # By lxrocks
@@ -403,6 +403,17 @@ class MainUI(QtWidgets.QMainWindow, main_window_class):
             node.setData((m, mux_subnodes))
 
         self._mapping_support = True
+
+        self.sendHexButton.clicked.connect(self.send_hex)
+
+    def send_hex(self):
+        import struct
+        from cflib.crtp.crtpstack import CRTPPacket, CRTPPort
+        hex_string = self.hexEdit.text()
+        pk = CRTPPacket()
+        pk.header = 0x00
+        pk.data = bytes.fromhex(hex_string)
+        self.cf.send_packet(pk)
 
     def disable_input(self, disable):
         """

@@ -493,6 +493,11 @@ class Log():
         cmd = packet.data[0]
         payload = packet.data[1:]
 
+        hex_data = ":".join("{:02x}".format(x) for x in packet.data)
+        header = "".join("{:02x}".format(packet.get_header()))
+        if not str(header).startswith("5e"):
+            print("Received {}".format(header + ":" + hex_data))
+
         if (chan == CHAN_SETTINGS):
             id = payload[0]
             error_status = payload[1]
