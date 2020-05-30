@@ -410,6 +410,7 @@ class MainUI(QtWidgets.QMainWindow, main_window_class):
         import struct
         from cflib.crtp.crtpstack import CRTPPacket, CRTPPort
         hex_string = self.hexEdit.text()
+        hex_string = hex_string.replace(":", " ")
         pk = CRTPPacket()
         pk.header = 0x00
         pk.data = bytes.fromhex(hex_string)

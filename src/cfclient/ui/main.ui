@@ -322,7 +322,7 @@ color: rgb(255, 255, 255);</string>
 color: rgb(46, 52, 54);</string>
       </property>
       <property name="text">
-       <string>dd 00</string>
+       <string>fd:00:5d:06:03:77:4e:00</string>
       </property>
      </widget>
     </item>
