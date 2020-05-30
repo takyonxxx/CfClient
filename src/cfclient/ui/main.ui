@@ -25,7 +25,7 @@
 color: rgb(255, 255, 255);</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" colspan="2">
+    <item row="0" column="0">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <layout class="QGridLayout" name="gridLayout_2">
@@ -243,6 +243,47 @@ color: rgb(255, 255, 255);</string>
        </layout>
       </item>
       <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLineEdit" name="hexEdit">
+          <property name="styleSheet">
+           <string notr="true">color: rgb(46, 52, 54);
+background-color: rgb(211, 215, 207);</string>
+          </property>
+          <property name="text">
+           <string>fd:00:5d:06:03:77:4e:00</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="sendHexButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Send Hex</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
        <widget class="QScrollArea" name="scrollArea">
         <property name="autoFillBackground">
          <bool>false</bool>
@@ -268,7 +309,7 @@ color: rgb(255, 255, 255);</string>
            <x>0</x>
            <y>0</y>
            <width>1119</width>
-           <height>507</height>
+           <height>505</height>
           </rect>
          </property>
          <property name="sizePolicy">
@@ -314,24 +355,6 @@ color: rgb(255, 255, 255);</string>
        </widget>
       </item>
      </layout>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLineEdit" name="hexEdit">
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(243, 243, 243);
-color: rgb(46, 52, 54);</string>
-      </property>
-      <property name="text">
-       <string>fd:00:5d:06:03:77:4e:00</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="sendHexButton">
-      <property name="text">
-       <string>Send Hex</string>
-      </property>
-     </widget>
     </item>
    </layout>
   </widget>

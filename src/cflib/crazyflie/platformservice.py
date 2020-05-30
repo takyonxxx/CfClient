@@ -104,7 +104,7 @@ class PlatformService():
         pk = CRTPPacket()
         pk.set_header(CRTPPort.LINKCTRL, LINKSERVICE_SOURCE)
         pk.data = (0,)
-        #self._cf.send_packet(pk)
+        self._cf.send_packet(pk)
 
     def _crt_service_callback(self, pk):
         if pk.channel == LINKSERVICE_SOURCE:

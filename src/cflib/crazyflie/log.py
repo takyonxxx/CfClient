@@ -80,7 +80,7 @@ CHAN_LOGDATA = 2
 
 # Commands used when accessing the Table of Contents
 CMD_TOC_ELEMENT = 0  # original version: up to 255 entries
-CMD_TOC_INFO = 1    # original version: up to 255 entries
+CMD_TOC_INFO = 1  # original version: up to 255 entries
 CMD_GET_ITEM_V2 = 2  # version 2: up to 16k entries
 CMD_GET_INFO_V2 = 3  # version 2: up to 16k entries
 
@@ -101,7 +101,6 @@ GET_TOC_ELEMENT = 'GET_TOC_ELEMENT'
 
 # The max size of a CRTP packet payload
 MAX_LOG_DATA_PACKET_SIZE = 30
-
 
 logger = logging.getLogger(__name__)
 
@@ -226,7 +225,7 @@ class LogConfig(object):
         else:
             pk.data = (CMD_CREATE_BLOCK, self.id)
         for var in self.variables:
-            if (var.is_toc_variable() is False):  # Memory location
+            if var.is_toc_variable() is False:  # Memory location
                 logger.debug('Logging to raw memory %d, 0x%04X',
                              var.get_storage_and_fetch_byte(), var.address)
                 pk.data.append(struct.pack('<B',
@@ -253,8 +252,8 @@ class LogConfig(object):
 
     def start(self):
         """Start the logging for this entry"""
-        if (self.cf.link is not None):
-            if (self._added is False):
+        if self.cf.link is not None:
+            if self._added is False:
                 self.create()
                 logger.debug('First time block is started, add block')
             else:
@@ -268,8 +267,8 @@ class LogConfig(object):
 
     def stop(self):
         """Stop the logging for this entry"""
-        if (self.cf.link is not None):
-            if (self.id is None):
+        if self.cf.link is not None:
+            if self.id is None:
                 logger.warning('Stopping block, but no block registered')
             else:
                 logger.debug('Sending stop logging for block id=%d', self.id)
@@ -281,8 +280,8 @@ class LogConfig(object):
 
     def delete(self):
         """Delete this entry in the Crazyflie"""
-        if (self.cf.link is not None):
-            if (self.id is None):
+        if self.cf.link is not None:
+            if self.id is None:
                 logger.warning('Delete block, but no block registered')
             else:
                 logger.debug('LogEntry: Sending delete logging for block id=%d'
@@ -325,7 +324,7 @@ class LogTocElement:
     def get_id_from_cstring(name):
         """Return variable type id given the C-storage name"""
         for key in list(LogTocElement.types.keys()):
-            if (LogTocElement.types[key][0] == name):
+            if LogTocElement.types[key][0] == name:
                 return key
         raise KeyError('Type [%s] not found in LogTocElement.types!' % name)
 
@@ -363,7 +362,7 @@ class LogTocElement:
 
         if (data):
             naming = data[1:]
-            zt = bytearray((0, ))
+            zt = bytearray((0,))
             self.group = naming[:naming.find(zt)].decode('ISO-8859-1')
             self.name = naming[naming.find(zt) + 1:-1].decode('ISO-8859-1')
 
@@ -373,7 +372,7 @@ class LogTocElement:
             self.access = data[0] & 0x10
 
 
-class Log():
+class Log:
     """Create log configuration"""
 
     # These codes can be decoded using os.stderror, but
@@ -445,15 +444,15 @@ class Log():
             # Check that we are able to find the variable in the TOC so
             # we can return error already now and not when the config is sent
             if var.is_toc_variable():
-                if (self.toc.get_element_by_complete_name(var.name) is None):
+                if self.toc.get_element_by_complete_name(var.name) is None:
                     logger.warning(
                         'Log: %s not in TOC, this block cannot be used!',
                         var.name)
                     logconf.valid = False
                     raise KeyError('Variable {} not in TOC'.format(var.name))
 
-        if (size <= MAX_LOG_DATA_PACKET_SIZE and
-                (logconf.period > 0 and logconf.period < 0xFF)):
+        if size <= MAX_LOG_DATA_PACKET_SIZE and \
+                0 < logconf.period < 0xFF:
             logconf.valid = True
             logconf.cf = self.cf
             logconf.id = self._config_id_counter
@@ -489,6 +488,11 @@ class Log():
 
     def _new_packet_cb(self, packet):
         """Callback for newly arrived packets with TOC information"""
+        hex_header = "".join("{:02x}".format(packet.get_header()))
+        if not hex_header.startswith("5e"):
+            hex_data = ":".join("{:02x}".format(x) for x in packet.data)
+            print("Received {}".format(hex_header + ":" + hex_data))
+
         chan = packet.channel
         cmd = packet.data[0]
         payload = packet.data[1:]
@@ -498,12 +502,12 @@ class Log():
         if not str(header).startswith("5e"):
             print("Received {}".format(header + ":" + hex_data))
 
-        if (chan == CHAN_SETTINGS):
+        if chan == CHAN_SETTINGS:
             id = payload[0]
             error_status = payload[1]
             block = self._find_block(id)
             if cmd == CMD_CREATE_BLOCK or cmd == CMD_CREATE_BLOCK_V2:
-                if (block is not None):
+                if block is not None:
                     if error_status == 0 or error_status == errno.EEXIST:
                         if not block.added:
                             logger.debug('Have successfully added id=%d', id)
@@ -524,8 +528,8 @@ class Log():
 
                 else:
                     logger.warning('No LogEntry to assign block to !!!')
-            if (cmd == CMD_START_LOGGING):
-                if (error_status == 0x00):
+            if cmd == CMD_START_LOGGING:
+                if error_status == 0x00:
                     logger.info('Have successfully started logging for id=%d',
                                 id)
                     if block:
@@ -544,14 +548,14 @@ class Log():
                         # an error in the UI, but everything is still working.
                         # block.error_cb.call(block, msg)
 
-            if (cmd == CMD_STOP_LOGGING):
-                if (error_status == 0x00):
+            if cmd == CMD_STOP_LOGGING:
+                if error_status == 0x00:
                     logger.info('Have successfully stopped logging for id=%d',
                                 id)
                     if block:
                         block.started = False
 
-            if (cmd == CMD_DELETE_BLOCK):
+            if cmd == CMD_DELETE_BLOCK:
                 # Accept deletion of a block that isn't added. This could
                 # happen due to timing (i.e add/start/delete in fast sequence)
                 if error_status == 0x00 or error_status == errno.ENOENT:
@@ -560,7 +564,7 @@ class Log():
                         block.started = False
                         block.added = False
 
-            if (cmd == CMD_RESET_LOGGING):
+            if cmd == CMD_RESET_LOGGING:
                 # Guard against multiple responses due to re-sending
                 if not self.toc:
                     logger.debug('Logging reset, continue with TOC download')
@@ -573,15 +577,15 @@ class Log():
                                              self._toc_cache)
                     toc_fetcher.start()
 
-        if (chan == CHAN_LOGDATA):
+        if chan == CHAN_LOGDATA:
             chan = packet.channel
             id = packet.data[0]
             block = self._find_block(id)
             timestamps = struct.unpack('<BBB', packet.data[1:4])
             timestamp = (
-                timestamps[0] | timestamps[1] << 8 | timestamps[2] << 16)
+                    timestamps[0] | timestamps[1] << 8 | timestamps[2] << 16)
             logdata = packet.data[4:]
-            if (block is not None):
+            if block is not None:
                 block.unpack_log_data(logdata, timestamp)
             else:
                 logger.warning('Error no LogEntry to handle id=%d', id)
